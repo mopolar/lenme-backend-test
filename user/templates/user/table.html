@@ -1,0 +1,31 @@
+{% extends "user/index.html" %}
+{% block start %}
+
+<table class="table" style="margin-top: 70px; font-size: 20px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Requested Money</th>
+        <th scope="col">Lending Time</th>
+        <th scope="col">Loan Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in query_results %}
+        <tr>
+            <td>{{ item.username }}</td>
+            <td>{{ item.requested_money }}</td>
+            <td>{{ item.lending_time }}</td>
+            <td>{{ item.loan_status }}</td>
+
+            {% if user.username != item.username %}
+            {% csrf_token %}
+                <td><button type="button" class="btn btn-primary"><a href={% url 'accept' item.id %} class="btn btn-info" role="button">Submit Request</a></button></td>
+            {% else %}
+                <td><button type="button" class="btn btn-primary" disabled>Submit Request</button></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock start %}

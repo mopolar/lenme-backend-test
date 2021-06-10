@@ -1,0 +1,43 @@
+{% extends "user/index.html" %}
+{% block start %}
+
+<table class="table" style="margin-top: 70px; font-size: 20px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Precentage</th>
+        <th scope="col">Payed Money</th>
+        <th scope="col">Loan Status</th>
+        <th scope="col">Deadline Pay Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in query_results %}
+        <tr>
+            <td>{{ item.username }}</td>
+            <td>{{ item.precentage }}</td>
+            <td>{{ item.payed_money }}</td>
+            <td>{{ item.loan_status }}</td>
+            {% if item.loan_status == 'Funded' %}
+              <td>{{ item.pay_date }}</td>
+              {% else %}
+              <td>  </td>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            {% csrf_token %}
+              {% if item.loan_status == 'Not Funded' %}
+                <td><button type="button" class="btn btn-primary"><a href={% url 'final' item.id %} class="btn btn-info" role="button">Accept Offer</a></button></td>
+                {% elif item.loan_status == 'Funded' %}
+                <td><button type="button" class="btn btn-primary"><a href={% url 'pay' item.id %} class="btn btn-info" role="button">Pay</a></button></td>
+                {% else %}
+                <td>  </td>
+              {% endif %}
+            {% else %}
+                <td><button type="button" class="btn btn-primary" disabled>Submit Request</button></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock start %}

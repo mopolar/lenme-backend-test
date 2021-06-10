@@ -1,0 +1,29 @@
+{% extends "user/index.html" %}
+{% block start %}
+
+<table class="table" style="margin-top: 70px; font-size: 20px;">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Borrower</th>
+        <th scope="col">Precentage</th>
+        <th scope="col">Payed Money</th>
+        <th scope="col">Loan Status</th>
+        <th scope="col">Deadline Pay Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in query_results %}
+        <tr>
+            <td>{{ item.username }}</td>
+            <th scope="col">{{ item.borrower_name }}</th>
+            <td>{{ item.precentage }}</td>
+            <td>{{ item.payed_money }}</td>
+            <td>{{ item.loan_status }}</td>
+            <td>{{ item.pay_date }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+{% endblock start %}
