@@ -159,5 +159,5 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 ####################collage email id ##############
 EMAIL_HOST_USER = 'mohammedgamal96010@gmail.com'
-EMAIL_HOST_PASSWORD = 'polarpolarZXC147'
+EMAIL_HOST_PASSWORD = 'password'
 ##################################################
